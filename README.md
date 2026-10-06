@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Proyecto C: Sistema de Predicción de Rendimiento Académico
 
 **Curso:** BD-151 Inteligencia Artificial Aplicada – Colegio Universitario de Cartago
@@ -157,3 +158,7 @@ _Completar._
 ## Conclusiones y recomendaciones
 
 _Completar._
+=======
+# Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico
+Proyecto asignado en el curso BD - 151 Inteligencia Artificial Aplicada | Se aborda un problema utilizando redes neuronales artificiales y requiere el desarrollo de un sistema desde la exploración de datos hasta el despliegue con API y frontend. Los proyectos están diseñados con complejidad equivalente pero en diferentes dominios de aplicación. 
+>>>>>>> e8abae40db6ce197f1ddc2802cdf4226ff226490
