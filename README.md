@@ -1,0 +1,2 @@
+# Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico
+Proyecto asignado en el curso BD - 151 Inteligencia Artificial Aplicada | Se aborda un problema utilizando redes neuronales artificiales y requiere el desarrollo de un sistema desde la exploración de datos hasta el despliegue con API y frontend. Los proyectos están diseñados con complejidad equivalente pero en diferentes dominios de aplicación. 
