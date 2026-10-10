@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Proyecto C: Sistema de Predicción de Rendimiento Académico
 
 **Curso:** BD-151 Inteligencia Artificial Aplicada – Colegio Universitario de Cartago
@@ -9,9 +8,10 @@
 
 | Nombre | Carné | Correo |
 |---|---|---|
-| | | |
-| | | |
-| | | |
+| Luis Diego Montero Vargas | | |
+| Mariana Méndez Pérez | | |
+| Nadin Rojas López | | |
+| Claret Rodríguez Jiménez | | |
 
 ## Descripción del problema
 
@@ -21,10 +21,12 @@ Sistema que predice el desempeño académico de estudiantes y detecta tempraname
 
 - **Nombre:** Student Performance Dataset (UCI)
 - **URL:** https://archive.ics.uci.edu/dataset/320/student+performance
-- **Registros:** 395 estudiantes (matemáticas) + 649 (portugués)
+- **Registros:** 395 estudiantes (matemáticas) + 649 (portugués) = 1044 registros
 - **Variables:** 33 (demográficas, sociales, escolares)
+- **Archivos:** `student-mat.csv` y `student-por.csv`, separados por `;`. Se unen en el notebook de preprocesamiento.
+- **Diccionario de datos:** `Diccionario de datos.txt`
 
-Colocar los archivos originales en `data/raw/` sin modificarlos.
+Los archivos originales están en `data/raw/` y no se modifican.
 
 ## Modelos
 
@@ -50,7 +52,7 @@ La documentación automática queda disponible en `http://localhost:8000/docs`.
 ## Estructura del proyecto
 
 ```
-Proyecto_C_Rendimiento_Academico/
+Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico/
 │
 ├── README.md                      ← Guía completa de instalación y uso del proyecto
 ├── requirements.txt               ← Dependencias Python
@@ -100,11 +102,11 @@ Proyecto_C_Rendimiento_Academico/
 
 ## Instalación
 
-Requisitos: Python 3.11 y Git.
+Requisitos: Python 3.10 a 3.13 (TensorFlow no es compatible con Python 3.14) y Git.
 
 ```bash
-git clone <url-del-repositorio>
-cd Proyecto_C_Rendimiento_Academico
+git clone https://github.com/DiegoMonteroCRC/Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico.git
+cd Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico
 python -m venv venv
 # Windows
 venv\Scripts\activate
@@ -158,7 +160,3 @@ _Completar._
 ## Conclusiones y recomendaciones
 
 _Completar._
-=======
-# Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico
-Proyecto asignado en el curso BD - 151 Inteligencia Artificial Aplicada | Se aborda un problema utilizando redes neuronales artificiales y requiere el desarrollo de un sistema desde la exploración de datos hasta el despliegue con API y frontend. Los proyectos están diseñados con complejidad equivalente pero en diferentes dominios de aplicación. 
->>>>>>> e8abae40db6ce197f1ddc2802cdf4226ff226490
