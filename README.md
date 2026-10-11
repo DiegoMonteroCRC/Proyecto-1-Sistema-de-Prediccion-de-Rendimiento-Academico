@@ -132,9 +132,9 @@ pip install -r requirements.txt
 
 ## Entregables
 
-- [ ] Notebook de EDA con análisis de factores que impactan el rendimiento
-- [ ] Feature engineering: creación de variables derivadas (promedio de notas, tasa de ausencias)
-- [ ] Dos modelos ANN: regresión de calificaciones y clasificación de riesgo
+- [x] Notebook de EDA con análisis de factores que impactan el rendimiento
+- [x] Feature engineering: creación de variables derivadas (promedio de notas, tasa de ausencias)
+- [x] Dos modelos ANN: regresión de calificaciones y clasificación de riesgo
 - [ ] API REST con endpoints /predict/grade y /predict/risk_level
 - [ ] Dashboard Streamlit con sistema de alertas tempranas
 - [ ] Recomendaciones automáticas de intervención según perfil del estudiante
@@ -145,18 +145,29 @@ pip install -r requirements.txt
 
 | Configuración | MAE | RMSE | Varianza explicada |
 |---|---|---|---|
-| | | | |
+| Versión A sin Dropout | 1.1619 | 1.7726 | 0.8236 |
+| Versión A con Dropout | 1.1759 | 1.6848 | 0.8307 |
+| Versión B sin Dropout | 2.6957 | 3.7023 | 0.1971 |
+| Versión B con Dropout | 2.6551 | 3.6020 | 0.2072 |
 
-**Modelo 2 (Clasificación)**
+**Modelo 2 (Clasificación Multiclase - Nivel de Riesgo)**
 
 | Configuración | Accuracy | Precision | Recall | F1 |
 |---|---|---|---|---|
-| | | | | |
+| Versión A sin Dropout | 0.7321 | 0.7362 | 0.7321 | 0.7329 |
+| Versión A con Dropout | 0.6794 | 0.6827 | 0.6794 | 0.6797 |
+| Versión B sin Dropout | 0.4163 | 0.4201 | 0.4163 | 0.3928 |
+| Versión B con Dropout | 0.4498 | 0.4572 | 0.4498 | 0.4272 |
 
 **Modelo seleccionado y justificación:**
 
-_Completar._
+- **Modelo 1:** Versión A con Dropout (`model1.keras`), al lograr menor RMSE (1.68) y mayor varianza explicada (0.83) reduciendo el sobreajuste.
+- **Modelo 2:** Versión A sin Dropout (`model2.keras`), alcanzando un F1 ponderado de **0.7329** y Accuracy de **73.21%**, optimizado con `learning_rate=0.0004` en Adam.
+- **Alerta temprana (Versión B):** Permite detectar a los estudiantes en riesgo únicamente a partir de variables de contexto y hábitos antes de disponer de notas de periodos previos.
 
 ## Conclusiones y recomendaciones
 
-_Completar._
+1. **Relevancia del rendimiento previo:** Las evaluaciones parciales ($G1$ y $G2$) representan los predictores más influyentes tanto en la calificación final esperada como en la clasificación de riesgo, aumentando la precisión en más de 28 puntos porcentuales respecto a los modelos de alerta temprana.
+2. **Utilidad de los modelos de alerta temprana (Versión B):** A pesar de la reducción en exactitud estricta al no disponer de notas previas, los modelos de alerta temprana permiten identificar patrones de riesgo asociados a ausencias reiteradas, fallos previos y tiempo de estudio limitado desde el primer día de clases.
+3. **Control del sobreajuste mediante EarlyStopping:** El monitoreo de la pérdida de validación (`val_loss`) y la restauración automática de los mejores pesos garantizan que ambos modelos mantengan su capacidad de generalización sobre registros nuevos sin memorizar el conjunto de entrenamiento.
+4. **Recomendaciones de intervención:** Se recomienda activar tutorías personalizadas y seguimiento de asistencia a estudiantes detectados en niveles de riesgo medio y alto, priorizando alertas tempranas para intervenir preventivamente antes de los primeros exámenes sumativos.
