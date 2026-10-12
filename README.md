@@ -6,12 +6,12 @@
 
 ## Integrantes
 
-| Nombre | Carné | Correo |
+| Nombre |
 |---|---|---|
-| Luis Diego Montero Vargas | | |
-| Mariana Méndez Pérez | | |
-| Nadin Rojas López | | |
-| Claret Rodríguez Jiménez | | |
+| Luis Diego Montero Vargas | 
+| Mariana Méndez Pérez |
+| Nadin Rojas López |
+| Claret Rodríguez Jiménez |
 
 ## Descripción del problema
 
@@ -55,6 +55,7 @@ La documentación automática queda disponible en `http://localhost:8000/docs`.
 Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico/
 │
 ├── README.md                      ← Guía completa de instalación y uso del proyecto
+├── USO_DE_IA.md                   ← Documentación obligatoria sobre uso de herramientas de IA
 ├── requirements.txt               ← Dependencias Python
 ├── .gitignore                     ← Archivos excluidos del control de versiones
 │
@@ -95,9 +96,8 @@ Proyecto-1-Sistema-de-Prediccion-de-Rendimiento-Academico/
 └── app/
     ├── Home.py                    ← Página principal del dashboard
     └── pages/
-        ├── 1_Prediccion.py        ← Predicciones individuales
-        ├── 2_Analisis.py          ← Análisis de lotes
-        └── 3_Metricas.py          ← Métricas y rendimiento
+        ├── 1_Prediccion.py        ← Predicciones individuales y alertas tempranas
+        └── 2_Metricas.py          ← Métricas de los modelos y rendimiento
 ```
 
 ## Instalación
@@ -135,9 +135,9 @@ pip install -r requirements.txt
 - [x] Notebook de EDA con análisis de factores que impactan el rendimiento
 - [x] Feature engineering: creación de variables derivadas (promedio de notas, tasa de ausencias)
 - [x] Dos modelos ANN: regresión de calificaciones y clasificación de riesgo
-- [ ] API REST con endpoints /predict/grade y /predict/risk_level
-- [ ] Dashboard Streamlit con sistema de alertas tempranas
-- [ ] Recomendaciones automáticas de intervención según perfil del estudiante
+- [x] API REST con endpoints /predict/grade y /predict/risk_level
+- [x] Dashboard Streamlit con sistema de alertas tempranas
+- [x] Recomendaciones automáticas de intervención según perfil del estudiante
 
 ## Resultados
 
@@ -171,3 +171,4 @@ pip install -r requirements.txt
 2. **Utilidad de los modelos de alerta temprana (Versión B):** A pesar de la reducción en exactitud estricta al no disponer de notas previas, los modelos de alerta temprana permiten identificar patrones de riesgo asociados a ausencias reiteradas, fallos previos y tiempo de estudio limitado desde el primer día de clases.
 3. **Control del sobreajuste mediante EarlyStopping:** El monitoreo de la pérdida de validación (`val_loss`) y la restauración automática de los mejores pesos garantizan que ambos modelos mantengan su capacidad de generalización sobre registros nuevos sin memorizar el conjunto de entrenamiento.
 4. **Recomendaciones de intervención:** Se recomienda activar tutorías personalizadas y seguimiento de asistencia a estudiantes detectados en niveles de riesgo medio y alto, priorizando alertas tempranas para intervenir preventivamente antes de los primeros exámenes sumativos.
+5. **Recomendación de set de datos:** Se recomienda que el set de datos sea mas amplio ya que esto facilita mucho mas el aprendizaje y entrenamiento del modelo.
