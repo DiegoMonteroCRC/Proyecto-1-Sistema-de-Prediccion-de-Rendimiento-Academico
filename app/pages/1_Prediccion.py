@@ -256,18 +256,19 @@ if submit:
         grade_data = predictor_service.predecir_nota(payload)
         risk_data = predictor_service.predecir_riesgo(payload)
 
-    if grade_data:
+    if grade_data and risk_data:
         st.write("")
         st.markdown("### Resultado de la Evaluación")
 
+        # Modelo 1 (Regresión): nota final proyectada
         nota = grade_data["predicted_grade"]
-        nivel_riesgo = grade_data["risk_level"]
-        risk_label = grade_data["risk_label"]
+        # Modelo 2 (Clasificación): nivel de riesgo
+        nivel_riesgo = risk_data["risk_level"]
 
         col_metrica, col_alerta = st.columns([1.2, 2.3])
 
         with col_metrica:
-            st.markdown('<div class="card-result">', unsafe_allow_html=True)
+            st.markdown("#### Modelo 1: Nota Final")
             st.metric(
                 label="Nota Final Proyectada (0 a 20)",
                 value=f"{nota:.2f}",
@@ -275,16 +276,24 @@ if submit:
             )
             progreso = max(0.0, min(1.0, nota / 20.0))
             st.progress(progreso)
-            st.caption(f"Nivel asignado: {risk_label}")
-            st.markdown('</div>', unsafe_allow_html=True)
+
+            # Mensaje sencillo según la nota proyectada (en Portugal se aprueba con 10)
+            if nota >= 11:
+                st.markdown(f"Según el modelo, el estudiante obtendría una nota de **{nota:.2f}**, suficiente para aprobar.")
+            elif nota >= 10:
+                st.markdown(f"Según el modelo, el estudiante obtendría una nota de **{nota:.2f}**: aprobaría, pero muy justo.")
+            elif nota >= 9:
+                st.markdown(f"Según el modelo, el estudiante obtendría una nota de **{nota:.2f}**: le faltaría poco para aprobar.")
+            else:
+                st.markdown(f"Según el modelo, el estudiante obtendría una nota de **{nota:.2f}**, por debajo de la nota mínima para aprobar (10).")
 
         with col_alerta:
-            st.markdown('<div class="card-result">', unsafe_allow_html=True)
+            st.markdown("#### Modelo 2: Nivel de Riesgo")
             if nivel_riesgo == 4:
                 st.markdown("""
                 <div class="alert-critica">
                     <strong>Atención prioritaria requerida (Riesgo Alto):</strong><br>
-                    La calificación estimada se ubica por debajo del mínimo de aprobación (menor a 10 puntos).
+                    El modelo de clasificación ubica al estudiante en el grupo de riesgo alto: su perfil se parece al de los estudiantes que reprueban.
                     Se recomienda incorporar al estudiante en planes de apoyo y tutoría de manera inmediata.
                 </div>
                 """, unsafe_allow_html=True)
@@ -292,7 +301,7 @@ if submit:
                 st.markdown("""
                 <div class="alert-alta">
                     <strong>Acompañamiento preventivo sugerido (Riesgo Medio):</strong><br>
-                    La calificación estimada se encuentra en rango limítrofe (entre 10 y 11.9 puntos).
+                    El modelo de clasificación ubica al estudiante en el grupo de riesgo medio: su perfil se parece al de los estudiantes que aprueban con dificultad.
                     Conviene realizar seguimiento para evitar caídas en evaluaciones futuras.
                 </div>
                 """, unsafe_allow_html=True)
@@ -300,7 +309,7 @@ if submit:
                 st.markdown("""
                 <div class="alert-moderada">
                     <strong>Seguimiento regular (Riesgo Bajo):</strong><br>
-                    La calificación estimada se encuentra en un tramo aceptable (entre 12 y 13.9 puntos).
+                    El modelo de clasificación ubica al estudiante en el grupo de riesgo bajo: su perfil se parece al de los estudiantes con un rendimiento aceptable.
                     El estudiante mantiene un avance estable con oportunidad de superación.
                 </div>
                 """, unsafe_allow_html=True)
@@ -308,17 +317,10 @@ if submit:
                 st.markdown("""
                 <div class="alert-baja">
                     <strong>Desempeño satisfactorio (Sin Riesgo):</strong><br>
-                    La calificación estimada es sobresaliente (14 puntos o superior).
+                    El modelo de clasificación ubica al estudiante en el grupo sin riesgo: su perfil se parece al de los estudiantes con buen rendimiento.
                     El estudiante muestra hábitos y desempeño favorables para concluir con éxito.
                 </div>
                 """, unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
-
-        # Resultado del Modelo 2 (Clasificación del nivel de riesgo)
-        if risk_data:
-            st.write("")
-            st.markdown("#### Modelo 2: Clasificación del Nivel de Riesgo")
-            st.markdown(f"Nivel clasificado: **{risk_data['risk_label']}**")
 
         # Factores destacados detectados en el perfil (sin emojis)
         st.write("")
