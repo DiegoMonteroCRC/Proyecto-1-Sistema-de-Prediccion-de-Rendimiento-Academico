@@ -314,6 +314,12 @@ if submit:
                 """, unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
+        # Resultado del Modelo 2 (Clasificación del nivel de riesgo)
+        if risk_data:
+            st.write("")
+            st.markdown("#### Modelo 2: Clasificación del Nivel de Riesgo")
+            st.markdown(f"Nivel clasificado: **{risk_data['risk_label']}**")
+
         # Factores destacados detectados en el perfil (sin emojis)
         st.write("")
         st.markdown("#### Factores Relevantes Detectados en el Perfil")
